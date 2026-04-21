@@ -1,0 +1,48 @@
+import tkinter as tk
+import tkinter.messagebox as mbox
+
+class MYGUI:
+    def __init__(self):
+        self.main_window = tk.Tk()
+        self.main_window.title('MPG calculator')
+        self.main_window.geometry('500x250')
+
+        # label1
+        my_label1 = tk.Label(self.main_window, text='enter the number of gallons your car holds:')
+        my_label1.pack(pady=10)
+
+        # entry widget1
+        self.entry_widget1 = tk.Entry(self.main_window, bg='white', fg = 'black', font=('Arial', 12))
+        self.entry_widget1.pack(pady=5)
+
+        # label2
+        my_label2 = tk.Label(self.main_window, text='enter the number of miles per tank:')
+        my_label2.pack(pady=10)
+
+        # entry widget 2
+        self.entry_widget2 = tk.Entry(self.main_window, bg='white', fg = 'black', font=('Arial', 12))
+        self.entry_widget2.pack(pady=5)
+
+        # calculate button
+        calculate_button = tk.Button(self.main_window, text = 'calculate miles per gallon', command = self.calculate_MPG)
+        calculate_button.pack(pady=15)
+
+        quit_button = tk.Button(self.main_window, text = 'exit', command = self.main_window.destroy)
+        quit_button.pack(side = 'bottom')
+
+        self.main_window.mainloop()
+
+    def calculate_MPG(self):
+        try:
+            gallons = float(self.entry_widget1.get())
+            miles = float(self.entry_widget2.get())
+            convert = float(miles) / float(gallons)
+        except ValueError:
+            mbox.showerror('Error', 'Please enter a number')
+        miles_per_gallon = (f'{convert:.2f}')
+        show_miles_per_gallon = mbox.showinfo('MPG', f'you get {miles_per_gallon} MPG')
+
+
+
+if __name__ == '__main__':
+    app = MYGUI()
